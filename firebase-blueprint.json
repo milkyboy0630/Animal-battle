@@ -1,0 +1,42 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile and credit information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Firebase Auth UID" },
+        "email": { "type": "string", "description": "User email" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "photoURL": { "type": "string", "description": "User profile photo URL" },
+        "credits": { "type": "integer", "description": "Current credit balance" },
+        "lastCheckIn": { "type": "string", "format": "date-time", "description": "Timestamp of last daily check-in" },
+        "checkInStreak": { "type": "integer", "description": "Current consecutive check-in streak" }
+      },
+      "required": ["uid", "credits"]
+    },
+    "Comic": {
+      "title": "Comic",
+      "description": "Generated comic information",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Owner's UID" },
+        "imageUrl": { "type": "string", "description": "URL of the generated comic image" },
+        "prompt": { "type": "string", "description": "Text prompt used for generation" },
+        "style": { "type": "string", "description": "Selected art style" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp" }
+      },
+      "required": ["uid", "imageUrl", "prompt", "style", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles"
+    },
+    "/comics/{comicId}": {
+      "schema": "Comic",
+      "description": "Generated comics"
+    }
+  }
+}
